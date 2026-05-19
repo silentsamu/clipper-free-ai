@@ -154,7 +154,7 @@ RENDER_OUTPUT_HEIGHT = 1080
 
 # AI Provider
 AI_PROVIDER = "gemini"
-OPENROUTER_MODEL = "deepseek/deepseek-v3-0324:free"
+OPENROUTER_MODEL = "deepseek/deepseek-chat:free"
 NVIDIA_MODEL = "deepseek-ai/deepseek-v4-pro"
 GEMINI_MODEL = "gemini-3-flash-preview"
 GEMINI_FALLBACK_MODEL = "gemini-2.5-flash"
@@ -669,7 +669,7 @@ def build_config(argv: list[str] | None = None) -> SimpleNamespace:
         ai_provider=args.ai_provider,
         api_key_nvidia=os.environ.get("NVIDIA_API_KEY", ""),
         api_key_openrouter=os.environ.get("OPENROUTER_API_KEY", ""),
-        openrouter_model="deepseek/deepseek-v3-0324:free",
+        openrouter_model="deepseek/deepseek-chat:free",
         nvidia_model=args.nvidia_model,
         gemini_model=args.gemini_model,
         gemini_fallback_model=args.gemini_fallback_model,
