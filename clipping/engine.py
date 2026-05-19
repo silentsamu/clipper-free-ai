@@ -1125,6 +1125,8 @@ def analyze_with_openrouter(transkrip_lengkap: str, cfg) -> list[dict]:
     )
 
     content = completion.choices[0].message.content
+    if not content or not content.strip():
+        raise ValueError(f"OpenRouter mengembalikan response kosong. Model: {model}. Cek rate limit atau coba model lain.")
     if "```" in content:
         content = re.sub(r"```(json)?", "", content).strip()
         content = content.split("```")[0].strip()
