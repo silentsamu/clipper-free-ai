@@ -142,7 +142,7 @@ BGM_POOL = {
 }
 
 # Whisper
-WHISPER_MODEL = "large-v3"
+WHISPER_MODEL = "small"
 WHISPER_DEVICE = "cuda"
 WHISPER_COMPUTE_TYPE = "float16"
 DOWNLOAD_SOURCE_HEIGHT = "max"
@@ -154,6 +154,7 @@ RENDER_OUTPUT_HEIGHT = 1080
 
 # AI Provider
 AI_PROVIDER = "gemini"
+OPENROUTER_MODEL = "deepseek/deepseek-v3-0324:free"
 NVIDIA_MODEL = "deepseek-ai/deepseek-v4-pro"
 GEMINI_MODEL = "gemini-3-flash-preview"
 GEMINI_FALLBACK_MODEL = "gemini-2.5-flash"
@@ -399,7 +400,7 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument(
         "--ai-provider",
-        choices=["gemini", "nvidia"],
+        choices=["gemini", "nvidia", "openrouter"],
         default=AI_PROVIDER,
         help="AI provider for video analysis (gemini or nvidia).",
     )
@@ -667,6 +668,8 @@ def build_config(argv: list[str] | None = None) -> SimpleNamespace:
         # AI
         ai_provider=args.ai_provider,
         api_key_nvidia=os.environ.get("NVIDIA_API_KEY", ""),
+        api_key_openrouter=os.environ.get("OPENROUTER_API_KEY", ""),
+        openrouter_model="deepseek/deepseek-v3-0324:free",
         nvidia_model=args.nvidia_model,
         gemini_model=args.gemini_model,
         gemini_fallback_model=args.gemini_fallback_model,
