@@ -942,10 +942,7 @@ def analyze_with_ai(transkrip_lengkap: str, cfg) -> list[dict]:
         if not cfg.api_key_openrouter:
             print("⚠️ OPENROUTER_API_KEY tidak ditemukan! Mencoba fallback ke Gemini...")
         else:
-            try:
-                return analyze_with_openrouter(transkrip_lengkap, cfg)
-            except Exception as e:
-                print(f"⚠️ OpenRouter API gagal: {e}. Fallback ke Gemini...")
+            return analyze_with_openrouter(transkrip_lengkap, cfg)
 
     if provider == "nvidia":
         if not cfg.api_key_nvidia:
