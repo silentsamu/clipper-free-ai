@@ -356,25 +356,20 @@ def transcribe_video(
 # ==============================================================================
 
 TARGET_ACCOUNTS = {
-    "Business": {
-        "akun_tujuan": "Business.Mereska",
-        "angle_desc": "Kalau angle-nya bisnis, brand, omzet, jualan, founder, marketing, atau UMKM.",
-        "bio": "Insight bisnis, founder story & brand lokal. Business | Founder | Finance | Beauty | Marketing"
+    "ChristianLife": {
+        "akun_tujuan": "TheMendedVessel-Life",
+        "angle_desc": "If the angle is about everyday life as a follower of Christ — daily walk with God, faith in daily challenges, spiritual growth, testimony, hope, healing, or restoration.",
+        "bio": "Living every day as a follower of Christ. Faith | Growth | Healing | Testimony | Hope"
     },
-    "Life": {
-        "akun_tujuan": "Life.Mereska",
-        "angle_desc": "Kalau angle-nya personal life, lifestyle, skincare, career, mindset, relationship, personal finance, atau self growth.",
-        "bio": "Klip insight buat upgrade hidup & mindset. Podcast | Career | Finance | Beauty | Self Growth"
+    "ChristianWork": {
+        "akun_tujuan": "TheMendedVessel-Work",
+        "angle_desc": "If the angle is about work, business, or career from a Christian perspective — work as worship, faith-driven leadership, Christian business ethics, purpose-driven career, or financial stewardship.",
+        "bio": "Faith at work. Business | Leadership | Finance | Purpose | Christian Ethics"
     },
-    "Creator": {
-        "akun_tujuan": "Creator.Mereska",
-        "angle_desc": "Kalau angle-nya konten digital, AI, affiliate, tools, clipping, monetisasi, atau cara menghasilkan uang dari konten.",
-        "bio": "Ngulik konten digital biar bisa jadi uang. AI | Affiliate | Clips | Tools | Monetize"
-    },
-    "Muslim": {
-        "akun_tujuan": "Muslim.Mereska",
-        "angle_desc": "Kalau angle-nya religi, rezeki, doa, ibadah, kerja karena Allah, keluarga Islami, atau bisnis dengan nilai Islam.",
-        "bio": "Reminder kerja, rezeki & hidup bernilai Islam. Islamic | Rezeki | Family | Work | Business"
+    "ChristianRelationship": {
+        "akun_tujuan": "TheMendedVessel-Relationship",
+        "angle_desc": "If the angle is about personal relationship with God, prayer, quiet time, marriage, parenting, community, or how faith shapes our relationships with others.",
+        "bio": "Closer to God, closer to each other. Prayer | Marriage | Parenting | Community | Devotion"
     }
 }
 
@@ -501,7 +496,7 @@ TUGAS UTAMA:
 - Semua output harus sangat relevan dengan isi klip, bukan isi video penuh secara umum.
 
 ATURAN PEMILIHAN KLIP & VIRAL-BILITY:
-- Durasi klip harus 30-180 detik.
+- Durasi klip harus 60-75 detik.
 - Pilih bagian yang punya emosi, konflik, kejutan, insight, opini kuat, pelajaran praktis, atau punchline jelas.
 - Evaluasi kekuatan viral (viral-bility) dan berikan "viral_score" (1-100) yang merepresentasikan seberapa viral suatu klip.
   - 90-100: Sangat berpotensi fyp/viral, emosi/konflik kuat, hook sangat nendang.
@@ -533,7 +528,7 @@ ATURAN PEMOTONGAN TIMING:
 - Jangan potong terlalu awal jika kalimat masih menggantung.
 - Jangan lanjutkan klip terlalu lama setelah inti pesan selesai.
 - Klip harus tetap bisa dipahami tanpa harus menonton bagian sebelum atau sesudahnya.
-- Jika ada dua momen kuat yang terlalu berdekatan dan saling mendukung, boleh digabung selama durasi tetap 30-180 detik.
+- Jika ada dua momen kuat yang terlalu berdekatan dan saling mendukung, boleh digabung selama durasi tetap 60-75 detik.
 - Jika ada dua momen kuat tetapi angle-nya berbeda, pisahkan sebagai kandidat klip berbeda.
 
 PENILAIAN INTERNAL VIRAL_SCORE:
@@ -557,9 +552,9 @@ Tentukan akun tujuan berdasarkan ANGLE video dari klip tersebut. Jangan menilai 
 {_build_account_classification_prompt()}
 
 ATURAN KHUSUS KLASIFIKASI:
-1. Beauty tidak otomatis masuk Life. (Bahas omzet/brand -> Business. Review/lifestyle -> Life. Affiliate/konten -> Creator).
-2. Finance tidak otomatis masuk Business. (Bahas omzet/bisnis -> Business. Personal finance/nabung -> Life. Cara bikin konten finance -> Creator).
-3. Owner story dibagi berdasarkan angle. (Perjuangan brand -> Business. Kehidupan pribadi/keluarga -> Life. Rezeki/ibadah -> Muslim).
+1. Not all Christian content goes to ChristianLife. (Daily walk/testimony/healing/scripture -> ChristianLife. Work/business/leadership/finance -> ChristianWork. Prayer/devotion/marriage/parenting/relationship with God -> ChristianRelationship).
+2. Business bukan otomatis semua konten sukses. (Entrepreneurship/finance/leadership -> Business. Mindset pribadi/keluarga -> Life. Iman dalam kerja -> Faith).
+3. Life mencakup konten relatable sehari-hari. (Pernikahan/parenting/growth pribadi -> Life. Kesaksian rohani -> Faith. Strategi bisnis -> Business).
 
 HOOK (WAJIB):
 - Ambil 1 kalimat paling punchy yang ADA DI DALAM klip.
@@ -617,8 +612,8 @@ ALASAN PEMILIHAN:
 - Jelaskan kenapa klip ini tetap menarik walau ditonton tanpa konteks video penuh.
 
 ATURAN BAHASA METADATA:
-- title_indonesia tetap wajib diisi untuk kompatibilitas internal / fallback.
-- title_indonesia HARUS dalam Bahasa Indonesia natural dan maksimal 100 karakter.
+- title_indonesia is still required for internal compatibility / fallback.
+- title_indonesia MUST be in natural English and maximum 100 characters.
 - Semua metadata lintas platform utama harus berbahasa Inggris natural.
 - Ini berlaku untuk:
   - title_inggris
@@ -754,7 +749,7 @@ STRUKTUR JSON WAJIB (Ikuti nama field ini secara kaku):
     "alasan": "...",
     "klasifikasi_akun": {{
       "tipe_akun": "Creator",
-      "akun_tujuan": "Creator.Mereska",
+      "akun_tujuan": "TheMendedVessel",
       "confidence": 87,
       "angle_utama": "Monetisasi konten digital dari niche beauty",
       "alasan": "...",
@@ -762,7 +757,7 @@ STRUKTUR JSON WAJIB (Ikuti nama field ini secara kaku):
       "bio_akun": "...",
       "alternatif_akun": {{
         "tipe_akun": "Life",
-        "akun_tujuan": "Life.Mereska",
+        "akun_tujuan": "TheMendedVessel",
         "alasan": "..."
       }}
     }}
@@ -943,6 +938,15 @@ def analyze_with_ai(transkrip_lengkap: str, cfg) -> list[dict]:
     """Dispatcher for AI analysis based on provider."""
     provider = getattr(cfg, "ai_provider", "gemini")
     
+    if provider == "openrouter":
+        if not cfg.api_key_openrouter:
+            print("⚠️ OPENROUTER_API_KEY tidak ditemukan! Mencoba fallback ke Gemini...")
+        else:
+            try:
+                return analyze_with_openrouter(transkrip_lengkap, cfg)
+            except Exception as e:
+                print(f"⚠️ OpenRouter API gagal: {e}. Fallback ke Gemini...")
+
     if provider == "nvidia":
         if not cfg.api_key_nvidia:
             print("⚠️ NVIDIA_API_KEY tidak ditemukan! Mencoba fallback ke Gemini...")
@@ -1095,3 +1099,50 @@ def analyze_with_gemini(
         contents=prompt,
         config=gemini_config,
     )
+
+def analyze_with_openrouter(transkrip_lengkap: str, cfg) -> list[dict]:
+    """Analyze transcript using OpenRouter API (OpenAI compatible)."""
+    from openai import OpenAI
+
+    model = getattr(cfg, "openrouter_model", "deepseek/deepseek-v3-0324:free")
+    print(f"[3/3] Menganalisis Top {cfg.jumlah_clip} momen menggunakan OpenRouter ({model})...")
+
+    if not cfg.api_key_openrouter:
+        raise ValueError("OPENROUTER_API_KEY tidak ditemukan di environment.")
+
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=cfg.api_key_openrouter,
+    )
+
+    prompt = get_analysis_prompt(transkrip_lengkap, cfg.jumlah_clip, cfg.durasi_hook)
+
+    completion = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": "You are a professional video editor and strategist. Return valid JSON array only. No explanation, no markdown."},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.5,
+        max_tokens=16384,
+    )
+
+    content = completion.choices[0].message.content
+    if "```" in content:
+        content = re.sub(r"```(json)?", "", content).strip()
+        content = content.split("```")[0].strip()
+
+    hasil = json.loads(content)
+
+    if isinstance(hasil, dict):
+        for key in ["clips", "data", "highlights"]:
+            if key in hasil and isinstance(hasil[key], list):
+                hasil = hasil[key]
+                break
+
+    if not isinstance(hasil, list):
+        if isinstance(hasil, dict):
+            return [hasil]
+        raise ValueError(f"OpenRouter mengembalikan format non-list/dict: {type(hasil)}")
+
+    return hasil
